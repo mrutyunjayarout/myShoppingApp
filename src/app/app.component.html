@@ -1,0 +1,92 @@
+
+  <nav class="navbar navbar-expand-sm "style="background-color: #e3f2fd;">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+    <a class="navbar-brand" routerLink="/home" href="javascript:void(0)">Home</a>
+    <a class="navbar-brand" routerLink="/productMgmt" *ngIf="loggedStatus" href="javascript:void(0)">Product Mgmt</a>
+    
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <!-- <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)">Link</a>
+        </li>
+      </ul> -->
+      
+        <div class="btn-group">
+        <input type="text" class="form-control dropdown-toggle" style="width:500px;" [(ngModel)]="userInput" 
+        (ngModelChange)="this.userSearchUpdate.next($event)"placeholder="Search a product"/>
+        <div class="dropdown-menu dropdown-menu-right show" *ngIf="toggleDropDownSearch" style="width:500px; margin-top:38px; overflow: auto;">
+            <ng-container *ngFor="let filterobj of filteredSearchList">
+            <a class="dropdown-item" id="filterobj.id" href="javascript:void(0)" (click)="setSerachField(filterobj)">
+                <span>{{(filterobj.title.substring(0,filterobj.title.toLowerCase().indexOf(userInput.toLowerCase())))}}</span>
+                <span style="background-color:#fff3cd">{{(filterobj.title.substring(filterobj.title.toLowerCase().indexOf(userInput.toLowerCase()),filterobj.title.toLowerCase().indexOf(userInput.toLowerCase())+userInput.length))}}</span>
+            <span>{{(filterobj.title.substring(filterobj.title.toLowerCase().indexOf(userInput.toLowerCase())+userInput.length,filterobj.title.length))}}</span>
+            </a>
+            </ng-container>
+          </div>
+        
+        <div class="input-group-append ">
+          <button class="btn btn-secondary" type="button" (click)="searchData()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+    </div>
+      
+      <a class="navbar-brand" style="margin-left:30px"  (click)="open(content)" href="javascript:void(0)">
+        <i class="fa fa-user" aria-hidden="true"><span>{{userName}}</span><br/>{{loggedStatus==false?'Login':'LogOut'}}</i>
+      </a>
+      <a [routerLink]="['/checkout']" class="button fancy-button"><i class="fa fa-shopping-cart" aria-hidden="true">{{shoppingCount}}</i>Checkout</a>
+
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+<router-outlet></router-outlet>
+</div>
+<ng-template #content let-modal>
+	<div class="modal-header">
+		Login
+	</div>
+    <div class="modal-body" style="padding:40px 50px;">
+        <form [formGroup]="loginForm">
+          <div class="form-group">
+            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+            <input type="text" class="form-control" id="usrname" placeholder="Enter email" formControlName="username" />
+          </div>
+          <br/>
+          <div class="form-group">
+            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+            <input type="password" class="form-control" id="psw" placeholder="Enter password" formControlName="password" />
+          </div><br/><br/>
+          <div class="form-group my-2 my-lg-0">
+            <button type="submit" (click)="submitLoginForm()" class="btn form-control btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+        </div>
+        </form>
+      </div>	
+</ng-template>
+
+<ng-template #msgContent>
+<div class="modal-header">
+    <h4 class="modal-title">Message</h4>
+    <button type="button" class="btn-close" (click)="onClosePopUp()" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <p>{{message}}</p>
+    
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="onClosePopUp()">Ok</button>
+</div>
+</ng-template>
+
+<div style="height:100%" class="overlay" *ngIf="showSpinner">
+<div class="spinner-border" style="position: absolute; top:50% ;left:50% " role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </div>

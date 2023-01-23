@@ -1,0 +1,40 @@
+<div class="container">
+<div class="row">
+    <div class="col-sm-6">
+        <img [src]="productDetails?.image" class="rounded image-style" alt="Cinque Terre" />
+    </div>
+    <div class="col-sm-6">
+        <h3>{{productDetails?.title}}</h3>
+        <br/><br/>
+
+        <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <span style="">Price : </span>{{productDetails?.price}}
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            {{productDetails?.rating.rate}} &nbsp;&nbsp;&nbsp;<span>{{productDetails?.rating.count}} reviews</span>
+        </div>
+        </div>
+        <br/>
+        <br/>
+        <p>{{productDetails?.description}} </p>
+        <br/>
+        <br/>
+        <div>Category : {{productDetails?.category}}</div>
+        <br/>
+        <br/>
+        <div>
+              Quantity<br/><br/>
+              <section style="text-align:right">
+              <button type="button" class="btn btn-info" (click) = "addProductToCart()">Add to cart</button>&nbsp; &nbsp;&nbsp;
+              <span style="cursor:pointer" (click)="decrease()" href="javascript:void(0)">-</span>&nbsp;
+              <button class="btn btn-primary btn-sm" (click)="addProductToCart()">
+              {{num}}
+            </button>&nbsp;
+            <span (click)="addProductToCart()" style="cursor:pointer" href="javascript:void(0)">+</span>
+            </section>
+        </div>
+
+    </div>
+  </div>
+</div>

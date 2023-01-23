@@ -1,0 +1,14 @@
+<div class="row">
+<ng-container *ngFor="let product of totalProductList">
+    
+    <div class="card col-md-2 m1" style="height:400px; ">
+        <img [src]="product.image" class="card-img-top" (click)="addToCart(product)" style="cursor:pointer;height:200px;width:200px" alt="...">
+        <div class="card-body" style="overflow:auto">
+          <span style="font-size:12px;">{{product.title}}</span>&nbsp;&nbsp;<span style="font-size:12px;">Rating: {{product.rating.rate}}</span> 
+          <section style="font-size:10px;">{{product.description}}</section>
+          
+        </div>
+      </div>
+
+</ng-container>
+</div>

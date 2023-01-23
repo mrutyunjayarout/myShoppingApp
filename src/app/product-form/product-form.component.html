@@ -1,0 +1,56 @@
+<form  [formGroup]="productForm">
+    
+        <div class="form-group">
+            <label for="title1">Title:</label>
+            <input type="text" class="form-control" id="title1" formControlName="title" />
+            <div *ngIf="(formSubmitted || productForm.touched) && productForm.get('title').errors?.required"  [ngClass] = "'error'"> 
+                Title required. 
+            </div> 
+            <div *ngIf=" productForm.touched && productForm.get('title').errors?.minlength"  [ngClass] = "'error'"> 
+                Minimum length should be 3.
+            </div>
+            <div *ngIf="productForm.touched && productForm.get('title').errors?.maxlength"  [ngClass] = "'error'"> 
+                Maximum length should be 50.
+            </div>
+          </div>
+        <br/>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="5" id="description" formControlName="description"></textarea>
+            <div *ngIf="(formSubmitted || productForm.touched) && productForm.get('description').errors?.required"  [ngClass] = "'error'"> 
+                Description required. 
+            </div> 
+            <div *ngIf=" (formSubmitted || productForm.touched) && productForm.get('description').errors?.minlength"  [ngClass] = "'error'"> 
+                Minimum length should be 3.
+            </div>
+           
+          </div>
+        <br/>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-select" id="category"  formControlName="category">
+                <option [ngValue]="null">-Select-</option>
+                <ng-container *ngFor="let category of categoryList">
+                <option>{{category}}</option>
+              </ng-container>
+            </select>
+            <div *ngIf="(formSubmitted||productForm.touched) && productForm.get('category').errors?.required"  [ngClass] = "'error'"> 
+                Category required. 
+            </div> 
+            
+          </div>
+        <br/>
+          
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input class="form-control" rows="5" id="price" formControlName="price" />
+            <div *ngIf="(formSubmitted||productForm.touched) && productForm.get('price').errors?.required"  [ngClass] = "'error'"> 
+                Price required. 
+            </div> 
+                  </div>
+    
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click) ="closePopUp()">cancel</button>
+                    <button type="button" class="btn btn-primary" (click) ="saveForm()">{{productObj==undefined?'Save':'Update'}}</button>
+                </div>
+</form>

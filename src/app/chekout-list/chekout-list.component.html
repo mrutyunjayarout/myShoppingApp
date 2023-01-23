@@ -1,0 +1,41 @@
+<div class="container" *ngIf="toggleCheckout">
+<h2>Shopping Cart</h2>
+<br/>
+
+<div class="row rounded border mt1" *ngFor="let product of checkoutProductDetails">
+    
+<div class="col-md-3"><img [src]="product.data?.image" class="rounded image-style" alt="Cinque Terre" /></div>
+<div class="col-md-8">
+<div>{{product.data.title}}</div><br/>
+<p>{{product.data.description}}</p>
+<div><span>Price: ${{product.data.price}}</span></div>
+<div><span>Quantity:{{product.count}}</span></div>
+</div>
+<div class="col-md-1">
+    <button type="button" (click)="removeItems(product.data)" class="btn-close mt1" aria-label="Close"></button>
+</div>
+</div>
+<div class="right">
+<p>SubTotal - {{subTotal| currency}} </p>
+<p>Tax - {{tax| currency}} </p>
+<p class="bold">Total - {{(subTotal+tax)| currency}} </p>
+<button type="button" class="btn btn-primary" data-bs-toggle="button" (click)="open(content)" autocomplete="off">Checkout</button>
+</div>
+    
+</div>
+
+<div class="container" *ngIf=" !toggleCheckout"> No checkedout item to display</div> 
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		message
+	</div>
+    <div class="modal-body" style="padding:40px 50px;">
+        Your order will be delivered as soon as possible
+      </div>
+	<div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="closeModalwindow()">Ok</button>
+
+	</div>
+</ng-template>
+
